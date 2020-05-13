@@ -1,5 +1,5 @@
 # import the necessary packages
-from .webcamvideostream import WebcamVideoStream
+# from .webcamvideostream import WebcamVideoStream
 
 class VideoStream:
 	def __init__(self, src=0, usePiCamera=False, resolution=(320, 240),
@@ -19,8 +19,6 @@ class VideoStream:
 
 		# otherwise, we are using OpenCV so initialize the webcam
 		# stream
-		else:
-			self.stream = WebcamVideoStream(src=src)
 
 	def start(self):
 		# start the threaded video stream
