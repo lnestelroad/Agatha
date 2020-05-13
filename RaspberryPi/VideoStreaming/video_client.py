@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-from imutils.video import VideoStream
+from videostream import VideoStream
 import imagezmq
 import argparse
 import socket
