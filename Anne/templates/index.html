@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+        <script src="../static/js/index.js"></script>
+
+        <!-- <link rel="icon" href="../static/images/IMG_6239.jpg" type="image/x-icon"> Adds the image on the browser tab -->
+
+    </head>
+    <body>
+        <div class="topnav">
+            <a class="active" href="/">Home</a>
+            <a class="active" href="/kitchen">Kitchen</a>
+            <a class="active" href="/camera">Surveillance</a>
+            <a class="active" href="/author">About the Author</a>
+
+        </div> 
+
+
+        {% block content %}
+        <div class='container'>
+            <div class='jumbotron'>
+                <h1 id='header'>Agatha</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2>Example of sending data to server using GET.</h2>
+                    <form action="kitchen" method="get">
+                        <label for="fname">First name:</label>
+                        <input type="text" id="fname" name="fname"><br><br>
+                        <label for="lname">Last name:</label>
+                        <input type="text" id="lname" name="lname"><br><br>
+                        <input type="submit" value="Go to Kitchen">
+                    </form>
+                </div>
+            </div>
+            
+            {% for i in range(5) %}
+                <br>
+            {% endfor %}
+
+            <div class="row">
+                <div class="col">
+                    <h2>Example of sending data to server using POST.</h2>
+                    <form action="camera" method="POST">
+                        <label for="fname">First name:</label>
+                        <input type="text" id="fname" name="fname"><br><br>
+                        <label for="lname">Last name:</label>
+                        <input type="text" id="lname" name="lname"><br><br>
+                        <input type="submit" value="Go to Surveillance">
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+
+    </body>
+</html>

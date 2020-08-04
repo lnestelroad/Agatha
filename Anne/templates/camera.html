@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block content%}
+
+<div class='container'>
+    <div class='jumbotron'>
+        <h1 id='header'>Surveillance</h1>
+    </div>
+</div>
+
+<div class="container">
+    {% if firstname is defined and lastname is defined %}
+        <h1>Welcome to Surveillance {{ firstname }} {{ lastname }}</h1>
+    {% else %}
+        <h2>Welcome to Surveillance user</h2>
+    {% endif %}
+    <form action="index" method="POST">
+        <label for="submit">This button take us back home using POST!</label>
+        <input type="submit" value="Go Home" name="submit">
+    </form>
+</div>
+{% endblock %}
+    

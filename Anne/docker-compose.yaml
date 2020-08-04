@@ -1,0 +1,29 @@
+version: '3.1'
+networks:
+    frontend:
+
+services: 
+    web:
+        build: .
+        ports:
+            - "8080:8080"
+        volumes: 
+            - ".:/usr/src/app"
+        networks:
+            - frontend
+        depends_on: 
+            - mongo
+
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: lnestelroad
+            MONGO_INITDB_ROOT_PASSWORD: lnestelroad
+        ports:
+            - "27017:27017"
+        volumes: 
+            - ../database/mongo-data:/data/db
+            - ../database/mongo-app:/var/www/html
+        networks:
+            - frontend
