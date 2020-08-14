@@ -10,3 +10,6 @@
 [submodule "Infrastructure/thirdparty-repos/libzmq"]
 	path = Infrastructure/thirdparty-repos/libzmq
 	url = https://github.com/zeromq/libzmq.git
+[submodule "Infrastructure/thirdparty-repos/spdlog"]
+	path = Infrastructure/thirdparty-repos/spdlog
+	url = https://github.com/gabime/spdlog.git

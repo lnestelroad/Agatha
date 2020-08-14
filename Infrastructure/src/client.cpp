@@ -1,36 +1,78 @@
 //  Hello World client
-#include "zmqpp/zmqpp.hpp"
-#include <string>
+
+#include <chrono>
 #include <iostream>
+#include <map>
+#include <string>
+#include <thread>
+#include "zmqpp/zmqpp.hpp"
+
+#include "client.hpp"
 
 using namespace std;
+using namespace zmqpp;
 
-int main(int argc, char *argv[])
-{
-    const string endpoint = "tcp://localhost:5555";
+mdcli::mdcli() {
+    ctx = context();
+    broker = "tcp://127.0.0.1:5426";
+    verbose = 1;
+    timeout = 2500;  //  msecs
+    retries = 3;     //  Before we abandon
+    client = new socket(ctx, socket_type::req);
 
-    // initialize the 0MQ context
-    zmqpp::context context;
+    s_mdcli_connect_to_broker();
+}
 
-    // generate a push socket
-    zmqpp::socket_type type = zmqpp::socket_type::req;
-    zmqpp::socket socket(context, type);
+mdcli::mdcli(string broker, int verbose) {
+    ctx = context();
+    broker = broker;
+    verbose = verbose;
+    timeout = 2500;  //  msecs
+    retries = 3;     //  Before we abandon
 
-    // open the connection
-    cout << "Connecting to hello world server…" << endl;
-    socket.connect(endpoint);
-    int request_nbr;
-    for (request_nbr = 0; request_nbr != 10; request_nbr++)
-    {
-        // send a message
-        cout << "Sending Hello " << request_nbr << "…" << endl;
-        zmqpp::message message;
-        // compose a message from a string and a number
-        message << "Hello";
-        socket.send(message);
-        string buffer;
-        socket.receive(buffer);
+    s_mdcli_connect_to_broker();
+    // signal(SIGINT, my_signal_handler);
+}
 
-        cout << "Received World " << request_nbr << endl;
-    }
+mdcli::~mdcli() {
+    client->close();
+    delete (client);
+
+    ctx.terminate();
+}
+
+void mdcli::s_mdcli_connect_to_broker() {
+    client->close();
+    delete (client);
+
+    client = new socket(ctx, socket_type::req);
+    client->connect(broker);
+    // TODO: Add logging event here if verbose
+}
+
+void mdcli::mdcli_set_timeout(int _timeout) {
+    timeout = _timeout;
+}
+
+void mdcli::mdcli_set_retries(int _retries) {
+    retries = _retries;
+}
+
+//  Here is the send method. It sends a request to the broker and gets
+//  a reply even if it has to retry several times. It takes ownership of
+//  the request message, and destroys it when sent. It returns the reply
+//  message, or NULL if there was no reply after multiple attempts:
+message mdcli::mdcli_send(string service, message* request) {
+    //  Prefix request with protocol frames
+    //  Frame 1: "MDPCxy" (six bytes, MDP/Client x.y)
+    //  Frame 2: Service name (printable string)
+
+    client->send(*request);
+
+    cout << "Wating for response ..." << endl;
+    zmqpp::message response;
+    client->receive(response);
+    cout << "Response from " << response.get(0) << endl;
+
+    return request;
 }

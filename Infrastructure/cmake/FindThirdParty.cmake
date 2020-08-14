@@ -13,18 +13,11 @@
 
 include(ExternalProject)
 
-
-ExternalProject_Add(libsodium
+ExternalProject_Add(
+    libsodium
     SOURCE_DIR ${Amon_Din_SOURCE_DIR}/
     INSTALL_DIR "${Amon_Din_BINARY_DIR}/prefix/libsodium"
     CONFIGURE_COMMAND ${Amon_Din_SOURCE_DIR}/thirdparty-repos/libsodium/configure --prefix=<INSTALL_DIR>
-    BUILD_COMMAND ${MAKE}
-)
-
-add_library(sodium STATIC IMPORTED)
-set_target_properties(sodium PROPERTIES
-    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/libsodium/lib/libsodium.a"
-    INTERFACE_INCLUDE_DIRECTORIES "${Amon_Din_BINARY_DIR}/prefix/libsodium/include"
 )
 
 ExternalProject_Add(
@@ -32,12 +25,6 @@ ExternalProject_Add(
 	SOURCE_DIR "${Amon_Din_SOURCE_DIR}/thirdparty-repos/libzmq/"
 	INSTALL_DIR "${Amon_Din_BINARY_DIR}/prefix/libzmq"
 	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-)
-
-add_library(zmq STATIC IMPORTED) # or STATIC instead of SHARED
-set_target_properties(zmq PROPERTIES
-    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/libzmq/lib/libzmq.a"
-    INTERFACE_INCLUDE_DIRECTORIES "${Amon_Din_BINARY_DIR}/prefix/libzmq/include"
 )
 
 ExternalProject_Add(
@@ -50,8 +37,17 @@ ExternalProject_Add(
 add_library(zmqpp STATIC IMPORTED) # or STATIC instead of SHARED
 set_target_properties(zmqpp PROPERTIES
     IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/zmqpp/lib/libzmqpp-static.a"
-    INTERFACE_INCLUDE_DIRECTORIES "${Amon_Din_BINARY_DIR}/prefix/zmqpp/include"
+)
+
+add_library(zmq STATIC IMPORTED) # or STATIC instead of SHARED
+set_target_properties(zmq PROPERTIES
+    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/libzmq/lib/libzmq.a"
 )
 
 # target_link_libraries(zmqpp INTERFACE zmq)
+add_library(sodium STATIC IMPORTED)
+set_target_properties(sodium PROPERTIES
+    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/libsodium/lib/libsodium.a"
+)
+
 include_directories(${Amon_Din_SOURCE_DIR}/thirdparty-repos/toml11)
