@@ -15,7 +15,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 
 # Sets up the compling 
-include(ctest)
+include(CTest)
 enable_testing()
 
 #------------------------------------------------------------------------------
@@ -28,6 +28,7 @@ SET(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 # Set output paths
 OPTION(LIB_PATH "path to put compiled libs" "${CMAKE_BINARY_DIR}/lib")
 SET(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
+set( CMAKE_CXX_FLAGS " -pthread " )
 
 # # Install Options
 # SET(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install/")
@@ -35,6 +36,7 @@ SET(LIBRARY_OUTPUT_PATH "${CMAKE_BINARY_DIR}/lib")
 #------------------------------------------------------------------------------
 # Cmake modules
 #------------------------------------------------------------------------------
+INCLUDE(FindZMQ)
 INCLUDE(FindThirdParty)
 INCLUDE(Version)
 INCLUDE(BuildInfo)

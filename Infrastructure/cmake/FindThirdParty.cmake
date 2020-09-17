@@ -13,41 +13,22 @@
 
 include(ExternalProject)
 
-ExternalProject_Add(
-    libsodium
-    SOURCE_DIR ${Amon_Din_SOURCE_DIR}/
-    INSTALL_DIR "${Amon_Din_BINARY_DIR}/prefix/libsodium"
-    CONFIGURE_COMMAND ${Amon_Din_SOURCE_DIR}/thirdparty-repos/libsodium/configure --prefix=<INSTALL_DIR>
-)
-
-ExternalProject_Add(
-    libzmq
-	SOURCE_DIR "${Amon_Din_SOURCE_DIR}/thirdparty-repos/libzmq/"
-	INSTALL_DIR "${Amon_Din_BINARY_DIR}/prefix/libzmq"
-	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-)
+## load in pkg-config support
+find_package(PkgConfig)
+## use pkg-config to get hints for 0mq locations
+pkg_check_modules(PC_ZeroMQ REQUIRED ${Amon_Din_BINARY_DIR}/prefix/libzmq/lib64/pkgconfig/libzmq.pc)
 
 ExternalProject_Add(
     libzmqpp
 	SOURCE_DIR "${Amon_Din_SOURCE_DIR}/thirdparty-repos/zmqpp/"
 	INSTALL_DIR "${Amon_Din_BINARY_DIR}/prefix/zmqpp"
-	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> -DZEROMQ_INCLUDE=${PC_ZeroMQ_INCLUDEDIR} -DZEROMQ_LIBRARY_SHARED=${PC_ZeroMQ_LIBRARY_DIRS}64/libzmq.so -DZEROMQ_LIBRARY_STATIC=${PC_ZeroMQ_LIBRARY_DIRS}64/libzmq.so
 )
 
-add_library(zmqpp STATIC IMPORTED) # or STATIC instead of SHARED
+add_library(zmqpp SHARED IMPORTED) # or STATIC instead of SHARED
 set_target_properties(zmqpp PROPERTIES
-    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/zmqpp/lib/libzmqpp-static.a"
+    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/zmqpp/lib/libzmqpp.so"
 )
 
-add_library(zmq STATIC IMPORTED) # or STATIC instead of SHARED
-set_target_properties(zmq PROPERTIES
-    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/libzmq/lib/libzmq.a"
-)
-
-# target_link_libraries(zmqpp INTERFACE zmq)
-add_library(sodium STATIC IMPORTED)
-set_target_properties(sodium PROPERTIES
-    IMPORTED_LOCATION "${Amon_Din_BINARY_DIR}/prefix/libsodium/lib/libsodium.a"
-)
 
 include_directories(${Amon_Din_SOURCE_DIR}/thirdparty-repos/toml11)

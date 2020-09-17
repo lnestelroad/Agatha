@@ -10,11 +10,9 @@
 #ifndef ADP_BROKER_H
 #define ADP_BROKER_H
 
-#include <ctime>
-#include <deque>
+// #include <ctime>
 #include <iostream>
-#include <list>
-#include <map>
+#include <vector>
 #include <string>
 #include "zmqpp/zmqpp.hpp"
 
@@ -43,6 +41,44 @@ static char* mdps_commands[] = {
     NULL,           (char*)"READY",     (char*)"REQUEST",
     (char*)"REPLY", (char*)"HEARTBEAT", (char*)"DISCONNECT"};
 
+typedef struct service{
+    std::string name;
+    std::string address;
+    int expiry;
+    bool busy;
+
+}service;
+
+class Broker{
+    private:
+        zmqpp::reactor Reactor;
+        vector<service> services;
+
+        zmqpp::context ctx;
+        zmqpp::socket* entry_point;
+
+    public:
+        Broker();
+        ~Broker();
+        void bind(std::string endpoint);
+
+        void mediate();
+        void process_client(std::string sender, zmqpp::message msg);
+        void process_service(std::string sender, zmqpp::message msg);
+        void delete_service(service service);
+
+        // void service_internal(service service, zmqpp::message msg);
+        // void send_heartbeat();
+};
+
+
+
+
+
+
+
+
+
 //  The broker class defines a single broker instance:
 
 // typedef struct service_t {
@@ -54,35 +90,35 @@ static char* mdps_commands[] = {
 //     int heartbeat;
 // } service_t;
 
-class MajorDomoBroker {
-   private:
-    zmqpp::context ctx;
-    zmqpp::socket* client_side;
-    zmqpp::socket* service_side;
-    zmqpp::reactor Reactor;
+// class MajorDomoBroker {
+//    private:
+//     zmqpp::context ctx;
+//     zmqpp::socket* client_side;
+//     zmqpp::socket* service_side;
+//     zmqpp::reactor Reactor;
 
-    // std::list<service_t> services;
+//     // std::list<service_t> services;
 
-    // uint64_t heartbeat_at;
+//     // uint64_t heartbeat_at;
 
-   public:
-    MajorDomoBroker();
-    ~MajorDomoBroker();
+//    public:
+//     MajorDomoBroker();
+//     ~MajorDomoBroker();
 
-    void bind();
-    void close();
+//     void bind();
+//     void close();
 
-    void mediate();
-    // void process_client(std::string sender, zmqpp::message msg);
-    // void process_service(std::string sender, zmqpp::message msg);
+//     void mediate();
+//     // void process_client(std::string sender, zmqpp::message msg);
+//     // void process_service(std::string sender, zmqpp::message msg);
 
-    // void send_to_service(service_t service,
-    //                      std::string command,
-    //                      std::string option,
-    //                      zmqpp::message msg);
+//     // void send_to_service(service_t service,
+//     //                      std::string command,
+//     //                      std::string option,
+//     //                      zmqpp::message msg);
 
-    // void delete_service(bool timout);
-    // void send_heartbeats();
-};
+//     // void delete_service(bool timout);
+//     // void send_heartbeats();
+// };
 
 #endif
