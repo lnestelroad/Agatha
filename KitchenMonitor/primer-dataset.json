@@ -1,0 +1,170 @@
+{
+    "pantry": [{
+            "type": "rice-jasmine",
+            "brand": "Dynasty",
+            "net_weight(oz)": 32,
+            "quantity": 2
+        },
+        {
+            "type": "rice-long_grain_white",
+            "brand": "Pampa",
+            "net_weight(oz)": 16,
+            "quantity": 5
+        },
+        {
+            "type": "rice-enriched_long_grain",
+            "brand": "Gulf Pacific",
+            "net_weight(oz)": 16,
+            "quantity": 1
+        },
+        {
+            "type": "rice-long_grain_brown",
+            "brand": "Gulf Pacific",
+            "net_weight(oz)": 16,
+            "quantity": 3
+        },
+        {
+            "type": "rice-basmati",
+            "brand": "VeeTee",
+            "net_weight(oz)": 9.9,
+            "quantity": 1
+        },
+        {
+            "type": "peanutbutter-creamy",
+            "brand": "Feeding America",
+            "net_weight(oz)": 16,
+            "quantity": 2
+        },
+        {
+            "type": "peanutbutter-creamy",
+            "brand": "Fisher",
+            "net_weight(oz)": 18,
+            "quantity": 2
+        },
+        {
+            "type": "peanutbutter-creamy",
+            "brand": "Skippy",
+            "net_weight(oz)": 40,
+            "quantity": 1
+        },
+        {
+            "type": "peanutbutter-creamy",
+            "brand": "Good & Gather",
+            "net_weight(oz)": 40,
+            "quantity": 1
+        },
+        {
+            "type": "condiment-ketchup",
+            "brand": "Heinz",
+            "net_weight(oz)": 32,
+            "quantity": 2
+        },
+        {
+            "type": "condiment-mayonnaise",
+            "brand": "Best Foods",
+            "net_weight(oz)": 25,
+            "quantity": 1
+        },
+        {
+            "type": "condiment-grape_jelly",
+            "brand": "Welch's",
+            "net_weight(oz)": 18,
+            "quantity": 1
+        },
+        {
+            "type": "condiment-syrup",
+            "brand": "Kroger",
+            "net_weight(oz)": 24,
+            "quantity": 1
+        },
+        {
+            "type": "pasta-linguine",
+            "brand": "Great Value",
+            "net_weight(oz)": 16,
+            "quantity": 1
+        },
+        {
+            "type": "pasta-spaghetti_veggie",
+            "brand": "Barilla",
+            "net_weight(oz)": 12,
+            "quantity": 2
+        },
+        {
+            "type": "pasta-spaghetti",
+            "brand": "Great Value",
+            "net_weight(oz)": 64,
+            "quantity": 1
+        },
+        {
+            "type": "pasta-bowtie",
+            "brand": "Great Value",
+            "net_weight(oz)": 12,
+            "quantity": 1
+        },
+        {
+            "type": "saltine_crackers",
+            "brand": "Nabisco",
+            "net_weight(oz)": 48,
+            "quantity": 2
+        },
+        {
+            "type": "stove_top-chicken",
+            "brand": "Kraft",
+            "net_weight(oz)": 6,
+            "quantity": 3
+        },
+        {
+            "type": "pasta_roni",
+            "flavors": {
+                "parmesan cheese": 1,
+                "angel hair pasta with herbs": 1,
+                "rice herb & butter": 1
+            },
+            "brand": "Feeding America",
+            "net_weight(oz)": 16,
+            "quantity": 2
+        },
+        {
+            "type": "hamburger_helper",
+            "flavors": {
+                "stroganoff": 1
+            },
+            "brand": "Great Value",
+            "net_weight(oz)": 64,
+            "quantity": 1
+        },
+        {
+            "type": "mac&cheese",
+            "brand": "Kroger",
+            "net_weight(oz)": 12,
+            "quantity": 4
+        },
+        {
+            "type": "mac&cheese",
+            "brand": "Velveeta",
+            "net_weight(oz)": 12,
+            "quantity": 4
+        },
+        {
+            "type": "brownie_mix",
+            "brand": "Better Crocker",
+            "net_weight(oz)": 16.5,
+            "quantity": 1
+        },
+        {
+            "type": "rice-chicken",
+            "brand": {
+                "Uncle Bens": 1,
+                "Knorr": 4
+            },
+            "net_weight(oz)": 8.8
+        },
+        {
+            "type": "meat_sause-sesame_chicken",
+            "brand": "Campbell's",
+            "net_weight(oz)": 11,
+            "quantity": 1
+        },
+
+    ]
+}

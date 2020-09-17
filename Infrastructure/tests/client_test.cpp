@@ -28,13 +28,13 @@ int main(int argc, char* argv[]) {
     socket_type type = socket_type::req;
     socket Request = socket(ctx, type);
 
-    Request.connect("tcp://127.0.0.1:5426");
+    Request.connect("tcp://localhost:5555");
 
     message msg;
     msg.push_back("");
-    msg.push_back(MDPC_CLIENT);
-    msg.push_back(MDPW_REQUEST);
-    msg.push_back("");
+    // msg.push_back(MDPC_CLIENT);
+    // msg.push_back(MDPW_REQUEST);
+    // msg.push_back("");
     msg.push_back("echo");
 
     Request.send(msg);
