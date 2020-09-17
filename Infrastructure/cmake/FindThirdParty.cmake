@@ -16,13 +16,13 @@ include(ExternalProject)
 ## load in pkg-config support
 find_package(PkgConfig)
 ## use pkg-config to get hints for 0mq locations
-pkg_check_modules(PC_ZeroMQ REQUIRED ${Amon_Din_BINARY_DIR}/prefix/libzmq/lib64/pkgconfig/libzmq.pc)
+pkg_check_modules(PC_ZeroMQ REQUIRED ${Amon_Din_BINARY_DIR}/prefix/libzmq/lib/pkgconfig/libzmq.pc)
 
 ExternalProject_Add(
     libzmqpp
 	SOURCE_DIR "${Amon_Din_SOURCE_DIR}/thirdparty-repos/zmqpp/"
 	INSTALL_DIR "${Amon_Din_BINARY_DIR}/prefix/zmqpp"
-	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> -DZEROMQ_INCLUDE=${PC_ZeroMQ_INCLUDEDIR} -DZEROMQ_LIBRARY_SHARED=${PC_ZeroMQ_LIBRARY_DIRS}64/libzmq.so -DZEROMQ_LIBRARY_STATIC=${PC_ZeroMQ_LIBRARY_DIRS}64/libzmq.so
+	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR> -DZEROMQ_INCLUDE=${PC_ZeroMQ_INCLUDEDIR} -DZEROMQ_LIBRARY_SHARED=${PC_ZeroMQ_LIBRARY_DIRS}/libzmq.so -DZEROMQ_LIBRARY_STATIC=${PC_ZeroMQ_LIBRARY_DIRS}/libzmq.so
 )
 
 add_library(zmqpp SHARED IMPORTED) # or STATIC instead of SHARED
